@@ -3,7 +3,7 @@
 <html>
 <head>
   <title>Bookstore - Details</title>
-<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/CA1/style.css">
 
 </head>
 <body>

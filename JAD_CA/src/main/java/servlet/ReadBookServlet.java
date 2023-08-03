@@ -12,11 +12,11 @@ import javax.servlet.annotation.WebServlet;
 import service.BookService;
 import model.Book;
 
-@WebServlet("/BookServlet")
-public class BookServlet extends HttpServlet {
+@WebServlet("/ReadBookServlet")
+public class ReadBookServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
        
-    public BookServlet() {
+    public ReadBookServlet() {
         super();
     }
     
@@ -37,7 +37,7 @@ public class BookServlet extends HttpServlet {
             
             // Forward the books for presenting
             request.setAttribute("books", books);
-            request.getRequestDispatcher("books.jsp").forward(request, response);
+            request.getRequestDispatcher("/CA1/Users&Admins/CRUD/readBook.jsp").forward(request, response);
 
 
     	} else {

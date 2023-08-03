@@ -10,7 +10,13 @@ public class UserDAO {
     }
     
     public User verifyUser(String username, String email, String password) {
-        return userCRUD.verifyUser(username, email, password);
+    	User user = userCRUD.verifyUser(username, email, password);
+        return user;
     }
+
+	public void addUser(User user) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

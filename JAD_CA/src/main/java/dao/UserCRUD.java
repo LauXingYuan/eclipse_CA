@@ -21,15 +21,12 @@ public class UserCRUD {
 			// Step1: Load JDBC Driver
 			Class.forName("com.mysql.jdbc.Driver");
 			// Step 2: Define Connection URL
-			String connURL = "jdbc:mysql://localhost/jad_ca1?user=root&password=ubuntu&serverTimezone=UTC";
+			String connURL = "jdbc:mysql://localhost/jad_ca?user=root&password=ubuntu&serverTimezone=UTC";
 			// Step 3: Establish connection to URL
 			Connection conn = DriverManager.getConnection(connURL);
 			// Step 4: Create Statement object
-			Statement stmt = conn.createStatement();
 			// Step 5: Execute SQL Command
-			// String sqlStr = "SELECT * FROM member WHERE name=? and password=?";
-			// out.print(sqlStr);
-			String sqlStr = "SELECT * FROM users WHERE email=?";
+			String sqlStr = "SELECT * FROM user WHERE email=?";
 			PreparedStatement pstmt = conn.prepareStatement(sqlStr);
 			pstmt.setString(1, email);
 			// pstmt.setString(2, password);
@@ -51,9 +48,8 @@ public class UserCRUD {
 					int roleId = 2; // default value if no role is found
 					if (roleRs.next()) {
 						roleId = roleRs.getInt("roleId");
-						user = new User(userID, username, email, password, roleId);
-
 					}
+					user = new User(userID, username, email, password, roleId);					
 				}
 			}
 
@@ -64,6 +60,7 @@ public class UserCRUD {
 		}
 		// and create a User object based on the retrieved data
 		// Return the user
+
 		return user;
 	}
 

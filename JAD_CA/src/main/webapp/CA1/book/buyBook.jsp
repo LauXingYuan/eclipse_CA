@@ -4,7 +4,7 @@
 <html>
 <head>
 <title>Bookstore - buyBook</title>
-<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/CA1/style.css">
 </head>
 <body>
 	<%@ include file="/CA1/header.jsp"%>

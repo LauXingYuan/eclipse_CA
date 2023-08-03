@@ -14,15 +14,16 @@ public class UserService {
 
 
     public User verifyUser(String username, String email, String password) {
-        return userDAO.verifyUser(username, email, password);
+    	User user = userDAO.verifyUser(username, email, password);
+        return user;
     }
 
     public void addUser(User user) {
         userDAO.addUser(user);
     }
-
-    public void updateUser(User user) {
-        userDAO.updateUser(user);
-    }
+//
+//    public void updateUser(User user) {
+//        userDAO.updateUser(user);
+//    }
 
 }
