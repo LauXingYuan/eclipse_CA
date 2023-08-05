@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="model.Book"%>
 <%@ page import="java.util.List"%>
+<%@ page import="java.util.ArrayList"%>
 
 
 
@@ -20,8 +21,54 @@
 	String role = "user";
 	System.out.println(request.getAttribute("books").getClass().getName());
 	List<Book> books = (List<Book>) request.getAttribute("books");
-	if (books != null) {
 	%>
+	<form action="" method="get">
+		<input type="number" name="minQuantity"
+			placeholder="Enter minimum stock quantity">
+		<button type="submit">Search</button>
+	</form>
+	<%
+	 int minQuantity = 5; // Default value
+    String minQuantityParam = request.getParameter("minQuantity");
+    if (minQuantityParam != null && !minQuantityParam.isEmpty()) {
+        minQuantity = Integer.parseInt(minQuantityParam);
+    }
+
+    List<Book> filteredBooks = new ArrayList<>();
+    if (filteredBooks != null) {
+        for (int i = 0; i < books.size(); i++) {
+            if (books.get(i).getQuantity() < minQuantity) {
+            	Book book = books.get(i);
+                filteredBooks.add(book);
+            }
+        }
+    }
+    %>
+	<% if (!filteredBooks.isEmpty()) { %>
+	<div style="margin-top: 20px;">
+		<h3>
+			Books with Low Stock (Less than
+			<%= minQuantity %>
+			quantity)
+		</h3>
+		<ul>
+			<%
+            for (Book book : filteredBooks) {
+            %>
+			<li><%= book.getTitle() %> (<%=book.getQuantity() %> left)</li>
+			<%
+            }
+            %>
+		</ul>
+	</div>
+	<% } else { %>
+	<div style="margin-top: 20px;">
+		<h3>No books with low stock found.</h3>
+	</div>
+	<% } %>
+	
+	<%
+	if (books != null) { %>
 	<div>
 		<table style="border-collapse: collapse; width: 100%;">
 			<thead>
@@ -69,6 +116,7 @@
 	%>
 
 
-	<a href="<%=request.getContextPath()%>/CA1/Users&Admins/profile">Go back to profile</a>
+	<a href="<%=request.getContextPath()%>/CA1/Users&Admins/profile">Go
+		back to profile</a>
 </body>
 </html>
