@@ -20,8 +20,9 @@ public class BookDAO {
         return bookCRUD.getBookByTitle(title);
     }
 
-    public void addBook(Book book) {
-        bookCRUD.addBook(book);
+    public int addBook(Book book) {
+        int rec = bookCRUD.addBook(book);
+        return rec;
     }
 
     public void updateBook(Book book) {

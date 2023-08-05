@@ -75,15 +75,15 @@ function submitForm() {
 					<button type="submit" class="admin-buttons">Read Books</button>
 				</form>
 
-				<form action="/BookServlet" method="POST">
+				<form action="<%=request.getContextPath()%>/CA1/Users&Admins/CRUD/createBook.jsp">
 					<button type="submit" class="admin-buttons">Create Books</button>
 				</form>
 
-				<form action="/BookServlet" method="POST">
+				<form action="<%=request.getContextPath()%>/CA1/Users&Admins/CRUD/updateBook.jsp">
 					<button type="submit" class="admin-buttons">Update Books</button>
 				</form>
 
-				<form action="/BookServlet" method="POST">
+				<form action="<%=request.getContextPath()%>/CA1/Users&Admins/CRUD/deleteBook.jsp">
 					<button type="submit" class="admin-buttons">Delete Books</button>
 				</form>
 			</div>

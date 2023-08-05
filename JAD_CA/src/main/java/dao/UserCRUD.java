@@ -15,7 +15,6 @@ public class UserCRUD {
 	public User verifyUser(String username, String email, String password) {
 		// Implement the database query to fetch a user by username
 		User user = null;
-		boolean verified = false;
 
 		try {
 			// Step1: Load JDBC Driver
@@ -32,14 +31,13 @@ public class UserCRUD {
 			// pstmt.setString(2, password);
 			ResultSet rs = pstmt.executeQuery();
 			// Step 6: Process Result
-			while (rs.next()) {
+			if (rs.next()) {
 				int userID = rs.getInt("userID");
 				String userPassword = rs.getString("password");
 
 				// Check if password matches
 				if (password.equals(userPassword)) {
 					// Perform another SQL query to get user role
-					verified = true;
 					String roleSql = "SELECT RoleID FROM user_userrole WHERE UserID=?";
 					PreparedStatement roleStmt = conn.prepareStatement(roleSql);
 					roleStmt.setInt(1, userID);

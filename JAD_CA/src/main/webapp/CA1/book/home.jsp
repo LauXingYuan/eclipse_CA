@@ -29,12 +29,14 @@
           String title = rs.getString("title");
           String author = rs.getString("author");
           double price = rs.getDouble("price");
+          String imageUrl = rs.getString("imageUrl");
           // ... retrieve other book data
 
           // Display the book information
           out.println("<h3>" + title + "</h3>");
           out.println("<p>Author: " + author + "</p>");
           out.println("<p>Price: $" + price + "</p>");
+          out.println("<img src=\"" + imageUrl + "\" alt=\"Book Cover\" style=\"max-width: 100px; height: auto;\">");
           out.println("<hr>");
         }
 

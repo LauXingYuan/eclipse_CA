@@ -22,8 +22,10 @@ public class BookService {
         return bookDAO.getBookByTitle(title);
     }
 
-    public void addBook(Book book) {
+    public int addBook(Book book) {
         // Delegate the creation of a book to the DAO layer
-        bookDAO.addBook(book);
+        int rec = bookDAO.addBook(book);
+        
+        return rec;
     }
 }

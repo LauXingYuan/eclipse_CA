@@ -23,16 +23,17 @@
 	if (books != null) {
 	%>
 	<div>
-		<table>
+		<table style="border-collapse: collapse; width: 100%;">
 			<thead>
 				<tr>
-					<th>Book ID</th>
-					<th>Title</th>
-					<th>Author</th>
-					<th>Publisher</th>
-					<th>Quantity</th>
-					<th>Price</th>
-					<th>Category</th>
+					<th style="border: 1px solid black;">Book Cover</th>
+					<th style="border: 1px solid black;">Book ID</th>
+					<th style="border: 1px solid black;">Title</th>
+					<th style="border: 1px solid black;">Author</th>
+					<th style="border: 1px solid black;">Publisher</th>
+					<th style="border: 1px solid black;">Quantity</th>
+					<th style="border: 1px solid black;">Price</th>
+					<th style="border: 1px solid black;">Category</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -41,13 +42,17 @@
 					Book book = books.get(i);
 				%>
 				<tr>
-					<td><%=book.getBookID()%></td>
-					<td><%=book.getTitle()%></td>
-					<td><%=book.getAuthor()%></td>
-					<td><%=book.getPublisher()%></td>
-					<td><%=book.getQuantity()%></td>
-					<td><%=book.getPrice()%></td>
-					<td><%=book.getCategory()%></td>
+					<td
+						style="border: 1px solid black; text-align: center; vertical-align: middle; display: flex; justify-content: center; align-items: center;"><img
+						src="<%=book.getImageUrl()%>" alt="Book Cover"
+						style="max-width: 100px; height: auto;"></td>
+					<td style="border: 1px solid black;"><%=book.getBookID()%></td>
+					<td style="border: 1px solid black;"><%=book.getTitle()%></td>
+					<td style="border: 1px solid black;"><%=book.getAuthor()%></td>
+					<td style="border: 1px solid black;"><%=book.getPublisher()%></td>
+					<td style="border: 1px solid black;"><%=book.getQuantity()%></td>
+					<td style="border: 1px solid black;"><%=book.getPrice()%></td>
+					<td style="border: 1px solid black;"><%=book.getCategory()%></td>
 				</tr>
 				<%
 				}
@@ -64,6 +69,6 @@
 	%>
 
 
-	<a href="/CA1/Users&Admins/profile">Go back to profile</a>
+	<a href="<%=request.getContextPath()%>/CA1/Users&Admins/profile">Go back to profile</a>
 </body>
 </html>

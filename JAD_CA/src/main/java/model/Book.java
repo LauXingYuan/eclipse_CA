@@ -7,9 +7,10 @@ public class Book {
     private String Publisher;
     private int Quantity;
     private double Price;
-    private String Category;
+    private int Category;
+    private String ImageUrl;
 
-    public Book(int BookID, String title, String author, String publisher, int quantity, double price, String category) {
+    public Book(int BookID, String title, String author, String publisher, int quantity, double price, int category, String imageUrl) {
         this.BookID = BookID;
         this.Title = title;
         this.Author = author;
@@ -17,6 +18,7 @@ public class Book {
         this.Quantity = quantity;
         this.Price = price;
         this.Category = category;
+        this.ImageUrl = imageUrl;
     }
 
 	public int getBookID() {
@@ -67,12 +69,20 @@ public class Book {
 		Price = price;
 	}
 	
-	public String getCategory() {
+	public int getCategory() {
 		return Category;
 	}
 
-	public void setCategory(String category) {
+	public void setCategory(int category) {
 		Category = category;
 	}
+	
+    public String getImageUrl() {
+        return ImageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        ImageUrl = imageUrl;
+    }
 
 }

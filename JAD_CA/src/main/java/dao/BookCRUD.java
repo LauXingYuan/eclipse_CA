@@ -18,15 +18,10 @@ public class BookCRUD {
 	public List<Book> getAllBooks() {
 		List<Book> books = new ArrayList<>();
 		Book book = null;
+		Connection conn = null;
 
 		try {
-			// Step1: Load JDBC Driver
-			Class.forName("com.mysql.jdbc.Driver");
-			// Step 2: Define Connection URL
-			String connURL = "jdbc:mysql://localhost:3306/jad_ca?user=root&password=ubuntu&serverTimezone=UTC";
-			// Step 3: Establish connection to URL
-			Connection conn = DriverManager.getConnection(connURL);
-			// Step 4: Create Statement object + Step 5: Execute SQL Command
+			conn = DBConnection.getConnection();
 			String sqlStr = "SELECT * FROM book";
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery(sqlStr);
@@ -39,12 +34,13 @@ public class BookCRUD {
 				String publisher = rs.getString("publisher");
 				int quantity = rs.getInt("quantity");
 				double price = rs.getDouble("price");
-				String category = rs.getString("categoryID");
+				int category = rs.getInt("categoryID");
+				String imageUrl = rs.getString("imageUrl");
 
 				// Create a new book using the service layer
-				book = new Book(bookID, title, author, publisher, quantity, price, category);
+				book = new Book(bookID, title, author, publisher, quantity, price, category, imageUrl);
 				books.add(book);
-			} 
+			}
 			// Step 7: Close connection
 			conn.close();
 		} catch (Exception e) {
@@ -53,8 +49,31 @@ public class BookCRUD {
 		return books;
 	}
 
-	public void addBook(Book book) {
-		// Your implementation to add a book to the database
+	public int addBook(Book book) {
+	    int rec = 0;
+	    Connection conn = null;
+
+	    try {
+	        conn = DBConnection.getConnection();
+	        String sqlStr = "INSERT INTO book (bookID, title, author, publisher, quantity, price, categoryID, imageUrl) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+	        PreparedStatement pstmt = conn.prepareStatement(sqlStr);
+	        pstmt.setInt(1, book.getBookID());
+	        pstmt.setString(2, book.getTitle());
+	        pstmt.setString(3, book.getAuthor());
+	        pstmt.setString(4, book.getPublisher());
+	        pstmt.setInt(5, book.getQuantity());
+	        pstmt.setDouble(6, book.getPrice());
+	        pstmt.setInt(7, book.getCategory());
+	        pstmt.setString(8, book.getImageUrl());
+
+	        rec = pstmt.executeUpdate();
+
+	        conn.close();
+	    } catch (Exception e) {
+	        System.err.println("Error at userDAO :" + e);
+	    }
+
+	    return rec;
 	}
 
 	public void updateBook(Book book) {
@@ -89,10 +108,11 @@ public class BookCRUD {
 				String publisher = rs.getString("publisher");
 				int quantity = rs.getInt("quantity");
 				double price = rs.getDouble("price");
-				String category = rs.getString("categoryID");
+				int category = rs.getInt("categoryID");
+				String imageUrl = rs.getString("imageUrl");
 
 				// Create a new book using the service layer
-				book = new Book(bookID, title, author, publisher, quantity, price, category);
+				book = new Book(bookID, title, author, publisher, quantity, price, category, imageUrl);
 			} else {
 				// No book found with the given name
 				return null;
